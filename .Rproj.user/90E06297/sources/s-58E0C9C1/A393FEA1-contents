@@ -1,0 +1,27 @@
+library(igraph)
+library(dplyr)
+library(geomnet)
+
+nodes <- read.csv("player_nodes.csv")
+head(nodes)
+edges <- read.csv("player_edges.csv")
+head(edges)
+colnames(edges) <- c("from", "to")
+
+
+g <- graph_from_data_frame(d=edges, directed=FALSE)
+
+
+lc <- cluster_louvain(g)
+membership(lc)
+communities(lc)
+plot(lc,g)
+
+
+
+plot(lc, g)
+# Infomap
+imc <- cluster_infomap(g)
+membership(imc)
+communities(imc)
+#plot(lc, g)
